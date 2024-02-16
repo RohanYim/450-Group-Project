@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class Mob : MonoBehaviour
 {
 
-    public static event Action<Mob> OnEnemykilled;
+    //public static event Action<Mob> OnEnemykilled;
     [SerializeField] float health, maxHealth = 3f;
 
     [SerializeField] HealthBar healthBar;
