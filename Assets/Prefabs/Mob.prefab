@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3716192118959358042}
   - component: {fileID: 1943230884807098639}
   - component: {fileID: 739451716516028777}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 3631492726921559896}
   - component: {fileID: 2141457905029852481}
   - component: {fileID: 9043352244538779684}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Mob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,6 +247,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb3ceab50814f4ce18a319ff81d5d6bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 2
+  moveDistance: 5
   health: 10
   maxHealth: 10
   healthBar: {fileID: 2561344243416400918}
@@ -261,7 +263,7 @@ GameObject:
   - component: {fileID: 4014953777340127857}
   - component: {fileID: 2679586086181513522}
   - component: {fileID: 2561344243416400918}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -362,7 +364,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8456416421895448773}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -401,7 +403,7 @@ GameObject:
   - component: {fileID: 8753943165673338947}
   - component: {fileID: 5216043025558751253}
   - component: {fileID: 7815158376233418767}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -502,7 +504,7 @@ GameObject:
   - component: {fileID: 1889880431390173759}
   - component: {fileID: 7271020655636517162}
   - component: {fileID: 1075901247720731980}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}

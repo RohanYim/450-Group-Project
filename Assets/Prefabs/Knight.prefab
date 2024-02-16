@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4442738796088442}
   - component: {fileID: 212788904406276302}
   - component: {fileID: 60902938826206530}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: 4316141996564886}
   - component: {fileID: 212103399574020264}
   - component: {fileID: 61042052734847416}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Leg0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 4828935868597222}
   - component: {fileID: 212658134950415922}
   - component: {fileID: 61827787262472840}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Leg1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +418,7 @@ GameObject:
   - component: {fileID: 4811347184950006}
   - component: {fileID: 212949568229280464}
   - component: {fileID: 114518099193907548}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mantle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -516,7 +516,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4236578733828576}
   - component: {fileID: 212835599946201972}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Blade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -599,7 +599,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4616291451764906}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GroundCast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -632,7 +632,7 @@ GameObject:
   - component: {fileID: 4110779522632870}
   - component: {fileID: 50860677075071130}
   - component: {fileID: 114210957743276982}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Knight
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -718,7 +718,7 @@ GameObject:
   - component: {fileID: 4713861123858526}
   - component: {fileID: 95796109168956802}
   - component: {fileID: 111731745464057958}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Legs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
