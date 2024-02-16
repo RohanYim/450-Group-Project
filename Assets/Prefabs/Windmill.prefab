@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4836906621724994}
   - component: {fileID: 212355015505795150}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WindMill_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4220424048923972}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Windmill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 4990363361919794}
   - component: {fileID: 212687188255602722}
   - component: {fileID: 114679031627955584}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WindMill_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
