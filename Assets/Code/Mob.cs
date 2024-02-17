@@ -13,7 +13,7 @@ public class Mob : MonoBehaviour
     private Vector3 targetPosition;
     private bool movingRight = true;
 
-    //public static event Action<Mob> OnEnemykilled;
+    // public static event Action<Mob> OnEnemykilled;
     [SerializeField] float health, maxHealth = 3f;
 
     [SerializeField] HealthBar healthBar;
@@ -23,15 +23,50 @@ public class Mob : MonoBehaviour
         healthBar = GetComponentInChildren<HealthBar>();
     }
 
+    public Vector3 attackScale = new Vector3(200f, 1f, 200f);
+    public float scaleDuration = 5f; 
+    private bool isAttacking = false;
+
     private void Start()
     {
         health = maxHealth;
         healthBar.UpdateHealthBar(health, maxHealth);
-        //target = Gameobject.Find("Player");
-
         startPosition = transform.position;
         targetPosition = startPosition + Vector3.right * moveDistance;
     }
+
+    private void StartAttack()
+    {
+        StartCoroutine(PerformAttack());
+    }
+
+    IEnumerator PerformAttack()
+    {
+        isAttacking = true;
+
+        Vector3 originalScale = transform.localScale;
+        Vector3 targetScale = new Vector3(attackScale.x, originalScale.y, attackScale.z);
+
+        float timer = 0;
+        while (timer <= scaleDuration)
+        {
+            transform.localScale = Vector3.Lerp(originalScale, targetScale, timer / scaleDuration);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        timer = 0;
+        while (timer <= scaleDuration)
+        {
+            transform.localScale = Vector3.Lerp(targetScale, originalScale, timer / scaleDuration);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        isAttacking = false;
+    }
+
+
 
 
     public void TakeDamage(float damageAmount)
@@ -52,20 +87,36 @@ public class Mob : MonoBehaviour
     void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-
-        if (transform.position == targetPosition)
+        if (Vector3.Distance(transform.position, targetPosition) < 1f)
         {
             if (movingRight)
             {
-                targetPosition = startPosition;
+                targetPosition = startPosition - Vector3.right * moveDistance;
             }
             else
             {
                 targetPosition = startPosition + Vector3.right * moveDistance;
             }
-            movingRight = !movingRight;
+            movingRight = !movingRight; 
+
+            if (!isAttacking)
+            {
+                StartAttack();
+            }
         }
     }
+
+
+    // attack players
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (isAttacking && collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<Player>().TakeDamage(1);
+        }
+    }
+
+
 
 
 }

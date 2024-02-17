@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour {
@@ -13,6 +14,10 @@ public class Player : MonoBehaviour {
     public Camera cam;
     public bool mirror;
 
+    public float health = 10f; 
+    public float maxHealth = 10f; 
+    public HealthBar healthBar; 
+
 
     private bool _canJump, _canWalk;
     private bool _isWalk, _isJump;
@@ -21,10 +26,20 @@ public class Player : MonoBehaviour {
     private Vector2 _inputAxis;
     private RaycastHit2D _hit;
 
+    
+
+    
+    private void Awake()
+    {
+        healthBar = GetComponentInChildren<HealthBar>();
+    }
+
 	void Start ()
     {
         rig = gameObject.GetComponent<Rigidbody2D>();
         _startScale = transform.localScale.x;
+        health = maxHealth;
+        healthBar.UpdateHealthBar(health, maxHealth);
 	}
 
     void Update()
@@ -44,6 +59,12 @@ public class Player : MonoBehaviour {
         {
             _canWalk = false;
             _isJump = true;
+        }
+
+        if(healthBar.transform != null)
+        {
+            healthBar.transform.localScale = new Vector3(Mathf.Abs(healthBar.transform.localScale.x) * Mathf.Sign(transform.localScale.x), healthBar.transform.localScale.y, healthBar.transform.localScale.z);
+            healthBar.transform.localRotation = Quaternion.identity; 
         }
     }
 
@@ -104,5 +125,20 @@ public class Player : MonoBehaviour {
     void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position, _GroundCast.position);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        healthBar.UpdateHealthBar(health, maxHealth);
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
