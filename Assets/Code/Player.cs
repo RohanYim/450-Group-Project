@@ -26,6 +26,15 @@ public class Player : MonoBehaviour {
     private Vector2 _inputAxis;
     private RaycastHit2D _hit;
 
+    public Transform blade; 
+    public float swingSpeed = 1f;
+    public Vector3 swingRotation = new Vector3(0f, 0f, -85f); 
+
+    private Quaternion originalRotation; 
+    private Quaternion targetRotation; 
+    private bool isSwinging = false; 
+    private bool canDealDamage = false;
+
     
 
     
@@ -40,6 +49,11 @@ public class Player : MonoBehaviour {
         _startScale = transform.localScale.x;
         health = maxHealth;
         healthBar.UpdateHealthBar(health, maxHealth);
+
+        if (blade != null)
+        {
+            originalRotation = blade.localRotation;
+        }
 	}
 
     void Update()
@@ -65,6 +79,51 @@ public class Player : MonoBehaviour {
         {
             healthBar.transform.localScale = new Vector3(Mathf.Abs(healthBar.transform.localScale.x) * Mathf.Sign(transform.localScale.x), healthBar.transform.localScale.y, healthBar.transform.localScale.z);
             healthBar.transform.localRotation = Quaternion.identity; 
+        }
+
+        if (Input.GetMouseButtonDown(0) && !isSwinging) 
+        {
+            StartCoroutine(SwingBlade());
+        }
+    }
+
+    private IEnumerator SwingBlade()
+    {
+        isSwinging = true;
+        canDealDamage = true;
+        float time = 0f;
+        targetRotation = Quaternion.Euler(swingRotation) * originalRotation; 
+
+        while (time < 1f)
+        {
+            blade.localRotation = Quaternion.Lerp(originalRotation, targetRotation, time);
+            time += Time.deltaTime * swingSpeed;
+            yield return null;
+        }
+
+        time = 0f;
+        while (time < 1f)
+        {
+            blade.localRotation = Quaternion.Lerp(targetRotation, originalRotation, time);
+            time += Time.deltaTime * swingSpeed;
+            yield return null;
+        }
+
+        blade.localRotation = originalRotation; 
+        isSwinging = false;
+        canDealDamage = false;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (canDealDamage && isSwinging && other.gameObject.CompareTag("Mob"))
+        {
+            var mob = other.GetComponent<Mob>(); 
+            if (mob != null)
+            {
+                mob.TakeDamage(1); 
+                canDealDamage = false;
+            }
         }
     }
 
