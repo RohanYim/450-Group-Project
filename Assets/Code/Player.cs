@@ -35,6 +35,8 @@ public class Player : MonoBehaviour {
     private bool isSwinging = false; 
     private bool canDealDamage = false;
 
+    public GameObject projectilePrefab;
+
     
 
     
@@ -84,6 +86,14 @@ public class Player : MonoBehaviour {
         if (Input.GetMouseButtonDown(0) && !isSwinging) 
         {
             StartCoroutine(SwingBlade());
+        }
+
+        //shoot
+        if (Input.GetMouseButtonDown(1))
+        {
+            GameObject newProjectile = Instantiate(projectilePrefab);
+            newProjectile.transform.position = transform.position;
+            newProjectile.transform.rotation = blade.rotation;
         }
     }
 
@@ -200,4 +210,6 @@ public class Player : MonoBehaviour {
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    
 }
