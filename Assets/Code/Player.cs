@@ -33,6 +33,7 @@ public class Player : MonoBehaviour {
     private Quaternion originalRotation; 
     private Quaternion targetRotation; 
     private bool isSwinging = false; 
+    private bool isShooting = false;
 
     public GameObject projectilePrefab;
 
@@ -84,7 +85,7 @@ public class Player : MonoBehaviour {
         }
 
         //shoot
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && isShooting)
         {
             GameObject newProjectile = Instantiate(projectilePrefab);
             newProjectile.transform.position = transform.position;
@@ -167,5 +168,11 @@ public class Player : MonoBehaviour {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    
+    public void SetShootingToTrue()
+    {
+        isShooting = true;
+    }
+
+
+
 }
