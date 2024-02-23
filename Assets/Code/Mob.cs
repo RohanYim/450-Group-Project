@@ -40,6 +40,7 @@ public class Mob : MonoBehaviour
         StartCoroutine(PerformAttack());
     }
 
+    // the mob will attack when it reaches both eages of their routes
     IEnumerator PerformAttack()
     {
         isAttacking = true;
@@ -65,9 +66,6 @@ public class Mob : MonoBehaviour
 
         isAttacking = false;
     }
-
-
-
 
     public void TakeDamage(float damageAmount)
     {
