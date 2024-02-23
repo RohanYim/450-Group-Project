@@ -358,11 +358,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a183f22a7a8f64af993f0baa7a8cf487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &365150282 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4429293680099116, guid: 628aa1da3b0e9bd42936e033c58f35f5, type: 3}
-  m_PrefabInstance: {fileID: 1536741015}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &388137482
 GameObject:
   m_ObjectHideFlags: 0
@@ -969,6 +964,8 @@ MonoBehaviour:
   damping: 0.9
   _target: {fileID: 24600428}
   offset: {x: 9, y: 7}
+  deadZone: 6
+  smoothTime: 0.2
 --- !u!114 &742416280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -982,13 +979,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxMode: 0
-  _backGrounds:
-  - _backGround: {fileID: 0}
-    _damping: 5
-  - _backGround: {fileID: 1335205406}
-    _damping: 30
-  - _backGround: {fileID: 365150282}
-    _damping: 35
+  _backGrounds: []
 --- !u!4 &809631806 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4338147500924890, guid: c262fa067521aaa4f8c24c256b35d736, type: 3}
