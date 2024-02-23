@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Mob : MonoBehaviour
+public class SuperMob : MonoBehaviour
 {
     public float moveSpeed = 2f;
     public float moveDistance = 5f;
