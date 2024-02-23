@@ -36,21 +36,21 @@ public class CameraMove : MonoBehaviour {
     {
         if (_target)
         {
-            // 检测水平方向的变化
+            // detect the change in vertical way
             int currentX = Mathf.RoundToInt(_target.position.x);
             faceLeft = currentX < lastX;
             lastX = currentX;
 
-            // 计算水平方向的目标位置，包括水平偏移
+            // Calculate target position in the horizontal way, including the offset
             Vector3 horizontalTargetPosition = faceLeft ? new Vector3(_target.position.x - offset.x, transform.position.y, transform.position.z) : new Vector3(_target.position.x + offset.x, transform.position.y, transform.position.z);
 
-            // 在水平方向上，仅当目标移动超出死区时才更新摄像机位置
+            // In horizontal way, the camera only moves when the target moves beyond the dead zone
             if (Mathf.Abs(transform.position.x - _target.position.x) > deadZone)
             {
                 transform.position = Vector3.SmoothDamp(transform.position, horizontalTargetPosition, ref velocity, smoothTime);
             }
 
-            // 在竖直方向上，摄像机始终跟随玩家，无死区
+            // In vertical way, no dead zone
             Vector3 verticalTargetPosition = new Vector3(transform.position.x, _target.position.y + offset.y, transform.position.z);
             transform.position = new Vector3(transform.position.x, Vector3.SmoothDamp(transform.position, verticalTargetPosition, ref velocity, smoothTime).y, transform.position.z);
         }

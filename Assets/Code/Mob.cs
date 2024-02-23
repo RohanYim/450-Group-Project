@@ -12,8 +12,6 @@ public class Mob : MonoBehaviour
     private Vector3 startPosition;
     private Vector3 targetPosition;
     private bool movingRight = true;
-
-    // public static event Action<Mob> OnEnemykilled;
     [SerializeField] float health, maxHealth = 3f;
 
     [SerializeField] HealthBar healthBar;
