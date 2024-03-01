@@ -12,6 +12,7 @@ public class Mob : MonoBehaviour
     private Vector3 startPosition;
     private Vector3 targetPosition;
     private bool movingRight = true;
+    // The initial health bar of normal mob is 3
     [SerializeField] float health, maxHealth = 3f;
 
     [SerializeField] HealthBar healthBar;
@@ -82,6 +83,7 @@ public class Mob : MonoBehaviour
 
     void Update()
     {
+        // The mob will automaticallt move right and left.
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
         if (Vector3.Distance(transform.position, targetPosition) < 1f)
         {
@@ -110,10 +112,10 @@ public class Mob : MonoBehaviour
         {
             collision.gameObject.GetComponent<Player>().TakeDamage(1);
         }
-
+        // If attacked by Projectile, minus 1 health point
         if (collision.gameObject.GetComponent<Projectile>())
         {
-            Destroy(gameObject);
+            gameObject.GetComponent<Mob>().TakeDamage(1);
         }
     }
 
