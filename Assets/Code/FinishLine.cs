@@ -13,7 +13,6 @@ public class FinishLine : MonoBehaviour
         if(collision.tag == "Player")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            Debug.Log("2");
         }
     }
 }
