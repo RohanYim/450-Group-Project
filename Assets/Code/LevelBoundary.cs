@@ -19,6 +19,7 @@ namespace Platformer
             
         }
 
+        // When the kngiht fall through the level boundary, the scene will be reloaded
         void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.GetComponent<Player>())

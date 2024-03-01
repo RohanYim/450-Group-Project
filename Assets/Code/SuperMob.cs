@@ -12,9 +12,11 @@ public class SuperMob : MonoBehaviour
     private Vector3 startPosition;
     private Vector3 targetPosition;
     private bool movingRight = true;
-    [SerializeField] float health, maxHealth = 3f;
+    // Change the max health bar to 10f
+    public float health, maxHealth = 10f;
+    Rigidbody2D rb;
 
-    [SerializeField] HealthBar healthBar;
+    public HealthBar healthBar;
 
     private void Awake()
     {
@@ -31,6 +33,7 @@ public class SuperMob : MonoBehaviour
         healthBar.UpdateHealthBar(health, maxHealth);
         startPosition = transform.position;
         targetPosition = startPosition + Vector3.right * moveDistance;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void StartAttack()
@@ -82,8 +85,9 @@ public class SuperMob : MonoBehaviour
 
     void Update()
     {
+        // After the knight take the yellow sword, the super mob will fall down onto the platform and move right and left.
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-        if (Vector3.Distance(transform.position, targetPosition) < 1f)
+        if (Vector3.Distance(transform.position, targetPosition) < 1f && rb.gravityScale != 0)
         {
             if (movingRight)
             {
@@ -111,9 +115,10 @@ public class SuperMob : MonoBehaviour
             collision.gameObject.GetComponent<Player>().TakeDamage(1);
         }
 
+        // If attacked by Projectile, minus 1 health point
         if (collision.gameObject.GetComponent<Projectile>())
         {
-            Destroy(gameObject);
+            gameObject.GetComponent<SuperMob>().TakeDamage(1);
         }
     }
 

@@ -168,6 +168,7 @@ public class Player : MonoBehaviour {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    // Once the knight pick up the yellow sword, knight can shoot the sword.
     public void SetShootingToTrue()
     {
         isShooting = true;
