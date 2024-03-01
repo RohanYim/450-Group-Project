@@ -25,6 +25,9 @@ public class Mob : MonoBehaviour
     public float scaleDuration = 1f;
     private bool isAttacking = false;
 
+    public GameObject fireballPrefab; // 在Inspector中设置这个
+    public Transform fireballSpawnPoint
+
     private void Start()
     {
         health = maxHealth;
@@ -63,6 +66,11 @@ public class Mob : MonoBehaviour
             transform.localScale = Vector3.Lerp(targetScale, originalScale, timer / scaleDuration);
             timer += Time.deltaTime;
             yield return null;
+        }
+
+        if (fireballPrefab != null && fireballSpawnPoint != null)
+        {
+            Instantiate(fireballPrefab, fireballSpawnPoint.position, Quaternion.identity);
         }
 
         isAttacking = false;
