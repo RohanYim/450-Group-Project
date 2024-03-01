@@ -12,7 +12,6 @@ public class Mob : MonoBehaviour
     private Vector3 startPosition;
     private Vector3 targetPosition;
     private bool movingRight = true;
-    // The initial health bar of normal mob is 3
     [SerializeField] float health, maxHealth = 3f;
 
     [SerializeField] HealthBar healthBar;
@@ -22,9 +21,12 @@ public class Mob : MonoBehaviour
         healthBar = GetComponentInChildren<HealthBar>();
     }
 
-    public Vector3 attackScale = new Vector3(200f, 1f, 200f);
-    public float scaleDuration = 5f; 
+    public float scaleFactor = 1.5f; 
+    public float scaleDuration = 1f;
     private bool isAttacking = false;
+
+    public GameObject fireballPrefab; // 在Inspector中设置这个
+    public Transform fireballSpawnPoint
 
     private void Start()
     {
@@ -45,8 +47,10 @@ public class Mob : MonoBehaviour
         isAttacking = true;
 
         Vector3 originalScale = transform.localScale;
-        Vector3 targetScale = new Vector3(attackScale.x, originalScale.y, attackScale.z);
+        // Equally scaled in all directions
+        Vector3 targetScale = originalScale * scaleFactor;
 
+        // make it bug
         float timer = 0;
         while (timer <= scaleDuration)
         {
@@ -55,12 +59,18 @@ public class Mob : MonoBehaviour
             yield return null;
         }
 
+        // recover to normal size
         timer = 0;
         while (timer <= scaleDuration)
         {
             transform.localScale = Vector3.Lerp(targetScale, originalScale, timer / scaleDuration);
             timer += Time.deltaTime;
             yield return null;
+        }
+
+        if (fireballPrefab != null && fireballSpawnPoint != null)
+        {
+            Instantiate(fireballPrefab, fireballSpawnPoint.position, Quaternion.identity);
         }
 
         isAttacking = false;
@@ -83,26 +93,27 @@ public class Mob : MonoBehaviour
 
     void Update()
     {
-        // The mob will automaticallt move right and left.
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-        if (Vector3.Distance(transform.position, targetPosition) < 1f)
+        // if attacking, stay still
+        if (!isAttacking)
         {
-            if (movingRight)
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, targetPosition) < 1f)
             {
-                targetPosition = startPosition - Vector3.right * moveDistance;
-            }
-            else
-            {
-                targetPosition = startPosition + Vector3.right * moveDistance;
-            }
-            movingRight = !movingRight; 
+                if (movingRight)
+                {
+                    targetPosition = startPosition - Vector3.right * moveDistance;
+                }
+                else
+                {
+                    targetPosition = startPosition + Vector3.right * moveDistance;
+                }
+                movingRight = !movingRight; 
 
-            if (!isAttacking)
-            {
                 StartAttack();
             }
         }
     }
+
 
 
     // attack players
@@ -112,10 +123,10 @@ public class Mob : MonoBehaviour
         {
             collision.gameObject.GetComponent<Player>().TakeDamage(1);
         }
-        // If attacked by Projectile, minus 1 health point
+
         if (collision.gameObject.GetComponent<Projectile>())
         {
-            gameObject.GetComponent<Mob>().TakeDamage(1);
+            Destroy(gameObject);
         }
     }
 
