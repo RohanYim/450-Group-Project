@@ -25,8 +25,7 @@ public class Mob : MonoBehaviour
     public float scaleDuration = 1f;
     private bool isAttacking = false;
 
-    public GameObject fireballPrefab; // 在Inspector中设置这个
-    public Transform fireballSpawnPoint
+    public GameObject fireballPrefab; 
 
     private void Start()
     {
@@ -68,10 +67,19 @@ public class Mob : MonoBehaviour
             yield return null;
         }
 
-        if (fireballPrefab != null && fireballSpawnPoint != null)
+        Vector3 spawnPosition = transform.position; // use mob's current position
+        spawnPosition += -transform.right * 0.5f; // fireball start from left
+
+        if (fireballPrefab != null)
         {
-            Instantiate(fireballPrefab, fireballSpawnPoint.position, Quaternion.identity);
+            Quaternion fireballRotation = Quaternion.Euler(0, 0, 0); 
+            GameObject fireballInstance = Instantiate(fireballPrefab, spawnPosition, fireballRotation); // get fireball instance
+
+            // ignore collision between fireball and mob
+            Physics2D.IgnoreCollision(fireballInstance.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         }
+
+
 
         isAttacking = false;
     }
