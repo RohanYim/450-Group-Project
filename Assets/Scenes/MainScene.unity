@@ -6546,8 +6546,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   moveDistance: 5
-  health: 0
-  maxHealth: 3
+  health: 300
+  maxHealth: 300
   healthBar: {fileID: 0}
   attackScale: {x: 200, y: 1, z: 200}
   scaleDuration: 5
