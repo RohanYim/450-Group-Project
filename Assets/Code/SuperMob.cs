@@ -101,7 +101,7 @@ public class SuperMob : MonoBehaviour
 
             if (!isAttacking)
             {
-                StartAttack();
+                // StartAttack();
             }
         }
     }
