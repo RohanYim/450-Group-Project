@@ -213,8 +213,9 @@ MonoBehaviour:
   health: 3
   maxHealth: 3
   healthBar: {fileID: 1614140517476834047}
-  attackScale: {x: 1.5, y: 1.5, z: 1}
+  scaleFactor: 1.5
   scaleDuration: 0.5
+  fireballPrefab: {fileID: 5200115936318543905, guid: 08633a7a35bb7407b8895101fc26fb8e, type: 3}
 --- !u!1001 &2495367822298463543
 PrefabInstance:
   m_ObjectHideFlags: 0
