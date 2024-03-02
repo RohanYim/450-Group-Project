@@ -12,6 +12,8 @@ public class Player : MonoBehaviour {
     public Animation _Legs;
     public Transform _Blade, _GroundCast;
     public Camera cam;
+    public Vector3 cameraOffset = new Vector3(0f, 1f, -10f);
+    public float cameraFollowSpeed = 10f;
     public bool mirror;
 
     public float health = 10f; 
@@ -55,68 +57,73 @@ public class Player : MonoBehaviour {
 
     void Update()
     {
-        if (_hit = Physics2D.Linecast(new Vector2(_GroundCast.position.x, _GroundCast.position.y + 0.2f), _GroundCast.position))
-        {
-            if (!_hit.transform.CompareTag("Player"))
-            {
-                _canJump = true;
-                _canWalk = true;
-            }
-        }
-        else _canJump = false;
-
         _inputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+        CheckJumpAbility();
+        HandleAttackAndShoot();
+    }
+
+    void FixedUpdate()
+    {
+        HandleMirrorAndRotation();
+        HandleMovementAndJump();
+    }
+
+    void CheckJumpAbility()
+    {
+        _hit = Physics2D.Linecast(new Vector2(_GroundCast.position.x, _GroundCast.position.y + 0.2f), _GroundCast.position);
+        if (_hit && !_hit.transform.CompareTag("Player"))
+        {
+            _canJump = true;
+            _canWalk = true;
+        }
+        else
+        {
+            _canJump = false;
+        }
+        
         if (_inputAxis.y > 0 && _canJump)
         {
             _canWalk = false;
             _isJump = true;
         }
+    }
 
-        if(healthBar.transform != null)
-        {
-            healthBar.transform.localScale = new Vector3(Mathf.Abs(healthBar.transform.localScale.x) * Mathf.Sign(transform.localScale.x), healthBar.transform.localScale.y, healthBar.transform.localScale.z);
-            healthBar.transform.localRotation = Quaternion.identity; 
-        }
-
-        // left click to swing blade and attack
+    void HandleAttackAndShoot()
+    {
         if (Input.GetMouseButtonDown(0) && !isSwinging) 
         {
             blade.GetComponent<Blade>().StartSwing();
         }
 
-        //shoot
         if (Input.GetMouseButtonDown(1) && isShooting)
         {
-            GameObject newProjectile = Instantiate(projectilePrefab);
-            newProjectile.transform.position = transform.position;
-            newProjectile.transform.rotation = blade.rotation;
+            GameObject newProjectile = Instantiate(projectilePrefab, transform.position, blade.rotation);
         }
     }
 
-    void FixedUpdate()
+    void HandleMirrorAndRotation()
     {
         Vector3 dir = cam.ScreenToWorldPoint(Input.mousePosition) - _Blade.transform.position;
         dir.Normalize();
 
-        if (cam.ScreenToWorldPoint(Input.mousePosition).x > transform.position.x + 0.2f)
-            mirror = false;
-        if (cam.ScreenToWorldPoint(Input.mousePosition).x < transform.position.x - 0.2f)
-            mirror = true;
+        mirror = cam.ScreenToWorldPoint(Input.mousePosition).x < transform.position.x;
 
         if (!mirror)
         {
-            rot = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             transform.localScale = new Vector3(_startScale, _startScale, 1);
-            _Blade.transform.rotation = Quaternion.AngleAxis(rot, Vector3.forward);
+            _Blade.transform.rotation = Quaternion.AngleAxis(Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg, Vector3.forward);
         }
-        if (mirror)
+        else
         {
-            rot = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
             transform.localScale = new Vector3(-_startScale, _startScale, 1);
-            _Blade.transform.rotation = Quaternion.AngleAxis(rot, Vector3.forward);
+            _Blade.transform.rotation = Quaternion.AngleAxis(Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg, Vector3.forward);
         }
+    }
 
-        if (_inputAxis.x != 0)
+    void HandleMovementAndJump()
+    {
+         if (_inputAxis.x != 0)
         {
             rig.velocity = new Vector2(_inputAxis.x * WalkSpeed * Time.deltaTime, rig.velocity.y);
 
@@ -141,6 +148,7 @@ public class Player : MonoBehaviour {
             _isJump = false;
         }
     }
+
 
     public bool IsMirror()
     {
