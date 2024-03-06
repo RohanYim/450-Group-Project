@@ -17,6 +17,9 @@ public class SuperMob : MonoBehaviour
     Rigidbody2D rb;
 
     public HealthBar healthBar;
+    public GameObject MobPrefab;
+    
+
 
     private void Awake()
     {
@@ -35,6 +38,28 @@ public class SuperMob : MonoBehaviour
         targetPosition = startPosition + Vector3.right * moveDistance;
         rb = GetComponent<Rigidbody2D>();
     }
+    // generate small mobs
+    void GenerateMobs()
+    {
+        Vector3 puffMobPosition = new Vector3(transform.position.x - 40, -41, transform.position.z);
+        Vector3 fireballMobPosition = new Vector3(transform.position.x -20, -41, transform.position.z);
+        GameObject puffMob = Instantiate(MobPrefab, puffMobPosition, Quaternion.identity);
+        puffMob.GetComponent<Mob>().puffAttack = true;
+        GameObject fireballMob = Instantiate(MobPrefab, fireballMobPosition, Quaternion.identity);
+        fireballMob.GetComponent<Mob>().fireballAttack = true;
+    }
+
+    public void StartGeneratingMobs()
+    {
+        StartCoroutine(GenerateMobsAfterDelay(5f));
+    }
+
+    private IEnumerator GenerateMobsAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay); 
+        GenerateMobs(); 
+    }
+
 
     private void StartAttack()
     {
@@ -81,6 +106,12 @@ public class SuperMob : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
+        // only show finish line when SuperMod is defeated
+        FinishLine finishLine = FindObjectOfType<FinishLine>(); 
+        if(finishLine != null)
+        {
+            finishLine.ActivateFinishLine();
+        }
     }
 
     void Update()

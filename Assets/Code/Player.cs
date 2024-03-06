@@ -98,9 +98,29 @@ public class Player : MonoBehaviour {
 
         if (Input.GetMouseButtonDown(1) && isShooting)
         {
-            GameObject newProjectile = Instantiate(projectilePrefab, transform.position, blade.rotation);
+            Vector3 spawnPosition = transform.position; 
+            Quaternion projectileRotation;
+
+            // Determine the rotation of the projector according to the mirror state
+            if (mirror)
+            {
+                // The character faces left, reversing the rotation of the projectile so that it also faces left
+                Vector3 flippedRotation = blade.eulerAngles;
+                flippedRotation.z += 180; 
+                projectileRotation = Quaternion.Euler(flippedRotation);
+            }
+            else
+            {
+                // Characters face right and use the current rotation of the sword directly
+                projectileRotation = blade.rotation;
+            }
+
+            GameObject newProjectile = Instantiate(projectilePrefab, spawnPosition, projectileRotation);
         }
     }
+
+
+
 
     void HandleMirrorAndRotation()
     {

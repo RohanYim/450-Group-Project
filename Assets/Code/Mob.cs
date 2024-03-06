@@ -12,6 +12,8 @@ public class Mob : MonoBehaviour
     private Vector3 startPosition;
     private Vector3 targetPosition;
     private bool movingRight = true;
+    public bool fireballAttack = false;  // fireball attacking mob
+    public bool puffAttack = false; // puff attacking mob
     [SerializeField] float health, maxHealth = 3f;
 
     [SerializeField] HealthBar healthBar;
@@ -37,11 +39,19 @@ public class Mob : MonoBehaviour
 
     private void StartAttack()
     {
-        StartCoroutine(PerformAttack());
+        // do puff attack
+        if(puffAttack){
+            StartCoroutine(PerformAttackPuff());
+        }
+        // do fireball attack
+        if(fireballAttack){
+            StartCoroutine(PerformAttackFireball());
+        }
+        
     }
 
     // the mob will attack when it reaches both eages of their routes
-    IEnumerator PerformAttack()
+    IEnumerator PerformAttackPuff()
     {
         isAttacking = true;
 
@@ -49,7 +59,7 @@ public class Mob : MonoBehaviour
         // Equally scaled in all directions
         Vector3 targetScale = originalScale * scaleFactor;
 
-        // make it bug
+        // make it big
         float timer = 0;
         while (timer <= scaleDuration)
         {
@@ -67,6 +77,13 @@ public class Mob : MonoBehaviour
             yield return null;
         }
 
+        isAttacking = false;
+    }
+
+    IEnumerator PerformAttackFireball()
+    {
+        isAttacking = true;
+
         Vector3 spawnPosition = transform.position; // use mob's current position
         spawnPosition += -transform.right * 0.5f; // fireball start from left
 
@@ -79,8 +96,7 @@ public class Mob : MonoBehaviour
             Physics2D.IgnoreCollision(fireballInstance.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         }
 
-
-
+        yield return new WaitForSeconds(1);
         isAttacking = false;
     }
 
@@ -116,7 +132,6 @@ public class Mob : MonoBehaviour
                     targetPosition = startPosition + Vector3.right * moveDistance;
                 }
                 movingRight = !movingRight; 
-
                 StartAttack();
             }
         }
