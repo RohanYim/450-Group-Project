@@ -235,7 +235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4809767136486952898, guid: 51ffcb6695bed9c469181fd2baff6b7f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -41.334618
+      value: -41
       objectReference: {fileID: 0}
     - target: {fileID: 4809767136486952898, guid: 51ffcb6695bed9c469181fd2baff6b7f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -529,11 +529,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 525540911879884502, guid: 08de218cee0fc401bafbffcb77beba6f, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2749147898574175695, guid: 08de218cee0fc401bafbffcb77beba6f, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3605285591630474453, guid: 08de218cee0fc401bafbffcb77beba6f, type: 3}
       propertyPath: m_AnchorMax.x
@@ -545,11 +545,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4906547794022964695, guid: 08de218cee0fc401bafbffcb77beba6f, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5182652808844950551, guid: 08de218cee0fc401bafbffcb77beba6f, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7091951443712144883, guid: 08de218cee0fc401bafbffcb77beba6f, type: 3}
       propertyPath: m_Pivot.x
@@ -637,7 +637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8930440500191318024, guid: 08de218cee0fc401bafbffcb77beba6f, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1243,7 +1243,7 @@ Transform:
   m_GameObject: {fileID: 840163059}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 54.28724, y: -40.853794, z: 0}
+  m_LocalPosition: {x: 58.4, y: -40.853794, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6479,7 +6479,7 @@ GameObject:
   - component: {fileID: 2093703844}
   - component: {fileID: 2093703843}
   - component: {fileID: 2093703848}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: Mob (3)
   m_TagString: SuperMob
   m_Icon: {fileID: 0}
@@ -6654,7 +6654,7 @@ Transform:
   m_GameObject: {fileID: 2093703840}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 79.9, y: 17.8, z: 0}
+  m_LocalPosition: {x: 102.2, y: 18.6, z: 0}
   m_LocalScale: {x: 15.742935, y: 18.494127, z: 12.227523}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6678,6 +6678,7 @@ MonoBehaviour:
   health: 300
   maxHealth: 300
   healthBar: {fileID: 0}
+  MobPrefab: {fileID: 8530226875477750067, guid: 51ffcb6695bed9c469181fd2baff6b7f, type: 3}
   attackScale: {x: 200, y: 1, z: 200}
   scaleDuration: 5
 --- !u!1001 &2103969228
