@@ -6265,6 +6265,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1855214856}
     - target: {fileID: 114210957743276982, guid: ed18ae643e6150e48a215de290a44235, type: 3}
+      propertyPath: aimPivot
+      value: 
+      objectReference: {fileID: 1855214856}
+    - target: {fileID: 114210957743276982, guid: ed18ae643e6150e48a215de290a44235, type: 3}
       propertyPath: JumpForce
       value: 200
       objectReference: {fileID: 0}

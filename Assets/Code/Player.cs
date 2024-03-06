@@ -38,6 +38,7 @@ public class Player : MonoBehaviour {
     private bool isShooting = false;
 
     public GameObject projectilePrefab;
+    public Transform aimPivot;
 
     
 
@@ -61,6 +62,15 @@ public class Player : MonoBehaviour {
 
         CheckJumpAbility();
         HandleAttackAndShoot();
+
+        Vector3 mousePostion = Input.mousePosition;
+        Vector3 mousePostionInWorld = Camera.main.ScreenToWorldPoint(mousePostion);
+        Vector3 fromPlayerToMouse = mousePostionInWorld - transform.position;
+
+        float radiansToMouse = Mathf.Atan2(fromPlayerToMouse.y, fromPlayerToMouse.x);
+        float angleToMouse = radiansToMouse * Mathf.Rad2Deg;
+
+        //aimPivot.rotation = Quaternion.Euler(0, 0, angleToMouse);
     }
 
     void FixedUpdate()
@@ -98,8 +108,18 @@ public class Player : MonoBehaviour {
 
         if (Input.GetMouseButtonDown(1) && isShooting)
         {
-            GameObject newProjectile = Instantiate(projectilePrefab, transform.position, blade.rotation);
+            GameObject newProjectile = Instantiate(projectilePrefab);
+            newProjectile.transform.position = transform.position;
+            newProjectile.transform.rotation = _Blade.rotation;
+            if (mirror)
+            {
+                newProjectile.transform.Rotate(0, 0, 180);
+            }
+
         }
+
+        
+
     }
 
     void HandleMirrorAndRotation()
@@ -120,7 +140,7 @@ public class Player : MonoBehaviour {
             _Blade.transform.rotation = Quaternion.AngleAxis(Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg, Vector3.forward);
         }
     }
-
+     
     void HandleMovementAndJump()
     {
          if (_inputAxis.x != 0)
