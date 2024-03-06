@@ -3,17 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+// only show finish line when SuperMod is defeated
 public class FinishLine : MonoBehaviour
-
-
 {
-    // If player touch the finish line, it will jump to the next scene in the building(next level).
+    void Start()
+    {
+        GetComponent<Collider2D>().enabled = false; 
+        GetComponent<SpriteRenderer>().enabled = false;
+    }
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            Debug.Log("2");
         }
+    }
+
+    public void ActivateFinishLine()
+    {
+        GetComponent<Collider2D>().enabled = true;
+        GetComponent<SpriteRenderer>().enabled = true;
     }
 }
