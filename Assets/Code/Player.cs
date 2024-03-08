@@ -166,7 +166,7 @@ public class Player : MonoBehaviour {
             }
             else if (SceneName == "Level_2")
             {
-                rig.velocity = new Vector2(-_inputAxis.x * WalkSpeed * Time.deltaTime, rig.velocity.y);
+                rig.velocity = new Vector2(_inputAxis.x * WalkSpeed * Time.deltaTime, rig.velocity.y);
 
                 if (_canWalk)
                 {
