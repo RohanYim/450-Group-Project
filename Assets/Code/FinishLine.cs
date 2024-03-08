@@ -7,11 +7,11 @@ using UnityEngine.SceneManagement;
 // only show finish line when SuperMod is defeated
 public class FinishLine : MonoBehaviour
 {
-    void Start()
-    {
-        GetComponent<Collider2D>().enabled = false; 
-        GetComponent<SpriteRenderer>().enabled = false;
-    }
+    //void Start()
+    //{
+    //    GetComponent<Collider2D>().enabled = false; 
+    //    GetComponent<SpriteRenderer>().enabled = false;
+    //}
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
