@@ -36,9 +36,13 @@ public class Player : MonoBehaviour {
     private Quaternion targetRotation; 
     private bool isSwinging = false; 
     private bool isShooting = false;
+    public int shootLeft = 10;
 
     public GameObject projectilePrefab;
     public Transform aimPivot;
+
+    // Which scence the character is in 
+    private string SceneName;
 
     
 
@@ -54,6 +58,7 @@ public class Player : MonoBehaviour {
         _startScale = transform.localScale.x;
         health = maxHealth;
         healthBar.UpdateHealthBar(health, maxHealth);
+        SceneName = SceneManager.GetActiveScene().name;
 	}
 
     void Update()
@@ -106,14 +111,18 @@ public class Player : MonoBehaviour {
             blade.GetComponent<Blade>().StartSwing();
         }
 
-        if (Input.GetMouseButtonDown(1) && isShooting)
+        if (Input.GetMouseButtonDown(1) && isShooting && SceneName == "MainScene")
         {
-            GameObject newProjectile = Instantiate(projectilePrefab);
-            newProjectile.transform.position = transform.position;
-            newProjectile.transform.rotation = _Blade.rotation;
-            if (mirror)
+            if (shootLeft > 0)
             {
-                newProjectile.transform.Rotate(0, 0, 180);
+                GameObject newProjectile = Instantiate(projectilePrefab);
+                newProjectile.transform.position = transform.position;
+                newProjectile.transform.rotation = _Blade.rotation;
+                if (mirror)
+                {
+                    newProjectile.transform.Rotate(0, 0, 180);
+                }
+                shootLeft--;
             }
 
         }
@@ -145,12 +154,25 @@ public class Player : MonoBehaviour {
     {
          if (_inputAxis.x != 0)
         {
-            rig.velocity = new Vector2(_inputAxis.x * WalkSpeed * Time.deltaTime, rig.velocity.y);
-
-            if (_canWalk)
+            if (SceneName == "MainScene")
             {
-                _Legs.clip = _walk;
-                _Legs.Play();
+                rig.velocity = new Vector2(_inputAxis.x * WalkSpeed * Time.deltaTime, rig.velocity.y);
+
+                if (_canWalk)
+                {
+                    _Legs.clip = _walk;
+                    _Legs.Play();
+                }
+            }
+            else if (SceneName == "Level_2")
+            {
+                rig.velocity = new Vector2(-_inputAxis.x * WalkSpeed * Time.deltaTime, rig.velocity.y);
+
+                if (_canWalk)
+                {
+                    _Legs.clip = _walk;
+                    _Legs.Play();
+                }
             }
         }
 

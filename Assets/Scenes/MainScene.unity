@@ -6679,8 +6679,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   moveDistance: 5
-  health: 300
-  maxHealth: 300
+  health: 10
+  maxHealth: 10
   healthBar: {fileID: 0}
   MobPrefab: {fileID: 8530226875477750067, guid: 51ffcb6695bed9c469181fd2baff6b7f, type: 3}
   attackScale: {x: 200, y: 1, z: 200}
