@@ -47,6 +47,10 @@ public class Player : MonoBehaviour {
     // Which scence the character is in 
     private string SceneName;
 
+    private float jumpCooldown = 0.2f; 
+    private float lastJumpTime; 
+    public LayerMask groundLayer;
+
     
 
     
@@ -102,14 +106,12 @@ public class Player : MonoBehaviour {
 
     void CheckJumpAbility()
     {
-        _hit = Physics2D.Linecast(new Vector2(_GroundCast.position.x, _GroundCast.position.y + 0.2f), _GroundCast.position);
-        if (_hit && !_hit.transform.CompareTag("Player"))
-        {
+        if (Time.time - lastJumpTime < jumpCooldown) return;
+        _hit = Physics2D.Linecast(new Vector2(_GroundCast.position.x, _GroundCast.position.y + 0.2f), _GroundCast.position, groundLayer);
+        if (_hit) {
             _canJump = true;
             _canWalk = true;
-        }
-        else
-        {
+        } else {
             _canJump = false;
         }
         
@@ -117,6 +119,7 @@ public class Player : MonoBehaviour {
         {
             _canWalk = false;
             _isJump = true;
+            lastJumpTime = Time.time;
         }
     }
 
