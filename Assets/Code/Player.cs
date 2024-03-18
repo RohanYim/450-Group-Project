@@ -20,6 +20,8 @@ public class Player : MonoBehaviour {
     public float maxHealth = 10f; 
     public HealthBar healthBar; 
 
+    public GameObject bushPrefab;
+
 
     private bool _canJump, _canWalk;
     private bool _isWalk, _isJump;
@@ -36,6 +38,7 @@ public class Player : MonoBehaviour {
     private Quaternion targetRotation; 
     private bool isSwinging = false; 
     private bool isShooting = false;
+    private bool isBuilding = false;
     public int shootLeft = 10;
 
     public GameObject projectilePrefab;
@@ -75,7 +78,20 @@ public class Player : MonoBehaviour {
         float radiansToMouse = Mathf.Atan2(fromPlayerToMouse.y, fromPlayerToMouse.x);
         float angleToMouse = radiansToMouse * Mathf.Rad2Deg;
 
+        // T for create a bush
+        if (Input.GetKeyDown(KeyCode.T) && isBuilding) {
+            CreateBushAtMousePosition();
+        }
+
         //aimPivot.rotation = Quaternion.Euler(0, 0, angleToMouse);
+    }
+
+    void CreateBushAtMousePosition() {
+        Vector3 mousePosition = Input.mousePosition;
+        Vector3 mousePositionInWorld = Camera.main.ScreenToWorldPoint(mousePosition);
+        mousePositionInWorld.z = 0; 
+
+        Instantiate(bushPrefab, mousePositionInWorld, Quaternion.identity);
     }
 
     void FixedUpdate()
@@ -222,6 +238,12 @@ public class Player : MonoBehaviour {
     public void SetShootingToTrue()
     {
         isShooting = true;
+    }
+
+    // Once the knight pick up the yellow sword on level2, knight can build the bushes.
+    public void SetBuildingToTrue()
+    {
+        isBuilding = true;
     }
 
 

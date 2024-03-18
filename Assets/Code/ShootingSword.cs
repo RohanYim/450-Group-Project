@@ -5,6 +5,8 @@ using UnityEngine;
 public class ShootingSword : MonoBehaviour
 {
     public string superMobTag = "SuperMob";
+    public bool shootingSkill = false;
+    public bool buildingSkill = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,19 +26,29 @@ public class ShootingSword : MonoBehaviour
 
         if (player != null)
         {
-            player.SetShootingToTrue();
-            Destroy(gameObject);
-
-            GameObject superMob = GameObject.FindGameObjectWithTag(superMobTag);
-            if (superMob != null)
+            if (shootingSkill)
             {
-                Rigidbody2D rb = superMob.GetComponent<Rigidbody2D>();
-                if (rb != null)
+                player.SetShootingToTrue();
+                // boss on level1
+                GameObject superMob = GameObject.FindGameObjectWithTag(superMobTag);
+                if (superMob != null)
                 {
-                    rb.gravityScale = 1;
-                    superMob.GetComponent<SuperMob>().StartGeneratingMobs();
+                    Rigidbody2D rb = superMob.GetComponent<Rigidbody2D>();
+                    if (rb != null)
+                    {
+                        rb.gravityScale = 1;
+                        superMob.GetComponent<SuperMob>().StartGeneratingMobs();
+                    }
                 }
             }
+
+            // level2 building skill
+            if (buildingSkill)
+            {
+                player.SetBuildingToTrue();
+            }
+
+            Destroy(gameObject);
 
         }
     }

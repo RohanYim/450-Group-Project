@@ -9,6 +9,10 @@ public class Mob : MonoBehaviour
 {
     public float moveSpeed = 2f;
     public float moveDistance = 5f;
+
+    // drop projecttile or not
+    public bool dropProjectileOnDeath = false;
+    public GameObject projectileDropPrefab;
     private Vector3 startPosition;
     private Vector3 targetPosition;
     private bool movingRight = true;
@@ -112,8 +116,16 @@ public class Mob : MonoBehaviour
 
     void Die()
     {
-        Destroy(gameObject);
+        // drop Projectile
+        if (dropProjectileOnDeath && projectileDropPrefab != null)
+        {
+            
+            Instantiate(projectileDropPrefab, transform.position, Quaternion.identity);
+        }
+
+        Destroy(gameObject); 
     }
+
 
     void Update()
     {
