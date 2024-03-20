@@ -18,7 +18,8 @@ public class SuperMob : MonoBehaviour
 
     public HealthBar healthBar;
     public GameObject MobPrefab;
-    
+
+
 
 
     private void Awake()

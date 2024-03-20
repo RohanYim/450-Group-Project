@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5159778172806295070}
   - component: {fileID: 3497938849311542826}
   - component: {fileID: -1456668529884724699}
+  - component: {fileID: 1230610341223452823}
   m_Layer: 6
   m_Name: Bush
   m_TagString: Untagged
@@ -130,3 +131,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 12.86, y: 1.24}
   m_EdgeRadius: 0
+--- !u!114 &1230610341223452823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4270486094530912466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec9f53d834f58040b776d77d388de38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

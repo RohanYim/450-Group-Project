@@ -30,6 +30,7 @@ public class ShootingSword : MonoBehaviour
             {
                 player.SetShootingToTrue();
                 // boss on level1
+                
                 GameObject superMob = GameObject.FindGameObjectWithTag(superMobTag);
                 if (superMob != null)
                 {

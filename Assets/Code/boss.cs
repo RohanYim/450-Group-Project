@@ -5,14 +5,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Mob : MonoBehaviour
+public class Boss : MonoBehaviour
 {
     public float moveSpeed = 2f;
     public float moveDistance = 5f;
 
-    // drop projecttile or not
-    public bool dropProjectileOnDeath = false;
-    public GameObject projectileDropPrefab;
     private Vector3 startPosition;
     private Vector3 targetPosition;
     private bool movingRight = true;
@@ -22,16 +19,18 @@ public class Mob : MonoBehaviour
 
     [SerializeField] HealthBar healthBar;
 
+    public Transform player;
+
     private void Awake()
     {
         healthBar = GetComponentInChildren<HealthBar>();
     }
 
-    public float scaleFactor = 1.5f; 
+    public float scaleFactor = 1.5f;
     public float scaleDuration = 1f;
     private bool isAttacking = false;
 
-    public GameObject fireballPrefab; 
+    public GameObject fireballPrefab;
 
     private void Start()
     {
@@ -39,50 +38,24 @@ public class Mob : MonoBehaviour
         healthBar.UpdateHealthBar(health, maxHealth);
         startPosition = transform.position;
         targetPosition = startPosition + Vector3.right * moveDistance;
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+        }
     }
 
     private void StartAttack()
     {
-        // do puff attack
-        if(puffAttack){
-            StartCoroutine(PerformAttackPuff());
-        }
+
         // do fireball attack
-        if(fireballAttack){
+        if (fireballAttack)
+        {
             StartCoroutine(PerformAttackFireball());
         }
-        
+
     }
 
     // the mob will attack when it reaches both eages of their routes
-    IEnumerator PerformAttackPuff()
-    {
-        isAttacking = true;
-
-        Vector3 originalScale = transform.localScale;
-        // Equally scaled in all directions
-        Vector3 targetScale = originalScale * scaleFactor;
-
-        // make it big
-        float timer = 0;
-        while (timer <= scaleDuration)
-        {
-            transform.localScale = Vector3.Lerp(originalScale, targetScale, timer / scaleDuration);
-            timer += Time.deltaTime;
-            yield return null;
-        }
-
-        // recover to normal size
-        timer = 0;
-        while (timer <= scaleDuration)
-        {
-            transform.localScale = Vector3.Lerp(targetScale, originalScale, timer / scaleDuration);
-            timer += Time.deltaTime;
-            yield return null;
-        }
-
-        isAttacking = false;
-    }
 
     IEnumerator PerformAttackFireball()
     {
@@ -93,8 +66,14 @@ public class Mob : MonoBehaviour
 
         if (fireballPrefab != null)
         {
-            Quaternion fireballRotation = Quaternion.Euler(0, 0, 0); 
-            GameObject fireballInstance = Instantiate(fireballPrefab, spawnPosition, fireballRotation); // get fireball instance
+            Vector2 directionToTarget = player.position - transform.position;
+            float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
+
+
+            Quaternion fireballRotation = Quaternion.Euler(0, 0, 0);
+            GameObject fireballInstance = Instantiate(fireballPrefab, spawnPosition, Quaternion.identity); // get fireball instance
+
+            fireballInstance.transform.rotation = Quaternion.Euler(0, 0, angle + 180);
 
             // ignore collision between fireball and mob
             Physics2D.IgnoreCollision(fireballInstance.GetComponent<Collider2D>(), GetComponent<Collider2D>());
@@ -108,7 +87,7 @@ public class Mob : MonoBehaviour
     {
         health -= damageAmount;
         healthBar.UpdateHealthBar(health, maxHealth);
-        if(health <= 0)
+        if (health <= 0)
         {
             Die();
         }
@@ -116,14 +95,7 @@ public class Mob : MonoBehaviour
 
     void Die()
     {
-        // drop Projectile
-        if (dropProjectileOnDeath && projectileDropPrefab != null)
-        {
-            
-            Instantiate(projectileDropPrefab, transform.position, Quaternion.identity);
-        }
-
-        Destroy(gameObject); 
+        Destroy(gameObject);
     }
 
 
@@ -143,9 +115,16 @@ public class Mob : MonoBehaviour
                 {
                     targetPosition = startPosition + Vector3.right * moveDistance;
                 }
-                movingRight = !movingRight; 
+                movingRight = !movingRight;
                 StartAttack();
             }
+        }
+
+        if (player != null)
+        {
+
+            
+            
         }
     }
 
@@ -162,7 +141,7 @@ public class Mob : MonoBehaviour
         if (collision.gameObject.GetComponent<Projectile>())
         {
             //Destroy(gameObject);
-            gameObject.GetComponent<Mob>().TakeDamage(1);
+            gameObject.GetComponent<Boss>().TakeDamage(1);
         }
     }
 
@@ -173,4 +152,3 @@ public class Mob : MonoBehaviour
 
 
 
-  

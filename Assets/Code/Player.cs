@@ -87,6 +87,19 @@ public class Player : MonoBehaviour {
             CreateBushAtMousePosition();
         }
 
+        if (Input.GetMouseButtonDown(1) && SceneName == "Level_2")
+        {
+
+            GameObject newProjectile = Instantiate(projectilePrefab);
+            newProjectile.transform.position = transform.position;
+            newProjectile.transform.rotation = _Blade.rotation;
+            if (mirror)
+            {
+                newProjectile.transform.Rotate(0, 0, 180);
+            }
+
+        }
+
         //aimPivot.rotation = Quaternion.Euler(0, 0, angleToMouse);
     }
 
@@ -130,25 +143,21 @@ public class Player : MonoBehaviour {
             blade.GetComponent<Blade>().StartSwing();
         }
 
-        if (Input.GetMouseButtonDown(1) && isShooting && SceneName == "MainScene")
+        if (Input.GetMouseButtonDown(1) && isShooting)
         {
-            if (shootLeft > 0)
+            GameObject newProjectile = Instantiate(projectilePrefab);
+            newProjectile.transform.position = transform.position;
+            newProjectile.transform.rotation = _Blade.rotation;
+            if (mirror)
             {
-                GameObject newProjectile = Instantiate(projectilePrefab);
-                newProjectile.transform.position = transform.position;
-                newProjectile.transform.rotation = _Blade.rotation;
-                if (mirror)
-                {
-                    newProjectile.transform.Rotate(0, 0, 180);
-                }
-                shootLeft--;
+                newProjectile.transform.Rotate(0, 0, 180);
             }
 
         }
 
-        
-
     }
+
+
 
     void HandleMirrorAndRotation()
     {
