@@ -6455,12 +6455,16 @@ PrefabInstance:
       objectReference: {fileID: 1855214856}
     - target: {fileID: 114210957743276982, guid: ed18ae643e6150e48a215de290a44235, type: 3}
       propertyPath: JumpForce
-      value: 200
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 114210957743276982, guid: ed18ae643e6150e48a215de290a44235, type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 245842550}
+    - target: {fileID: 114210957743276982, guid: ed18ae643e6150e48a215de290a44235, type: 3}
+      propertyPath: bushPrefab
+      value: 
+      objectReference: {fileID: 4270486094530912466, guid: 0dd2d788e0e4943a293e603f0d2665bd, type: 3}
     - target: {fileID: 114210957743276982, guid: ed18ae643e6150e48a215de290a44235, type: 3}
       propertyPath: swingSpeed
       value: 5
@@ -6469,6 +6473,10 @@ PrefabInstance:
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: 3296340215200694475, guid: 0e816dbb17bcae24b853a70ff078f68d, type: 3}
+    - target: {fileID: 114210957743276982, guid: ed18ae643e6150e48a215de290a44235, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 114518099193907548, guid: ed18ae643e6150e48a215de290a44235, type: 3}
       propertyPath: _offset
       value: 0.05
