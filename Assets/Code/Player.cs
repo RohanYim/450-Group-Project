@@ -241,9 +241,19 @@ public class Player : MonoBehaviour {
         }
     }
 
-    void Die()
+    public void Die()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        FinishLine finishLine = FindObjectOfType<FinishLine>(); 
+        Door door = FindObjectOfType<Door>(); 
+
+        if(finishLine != null && door != null)
+        {
+            finishLine.aliveSuperMob(); 
+            finishLine.aliveBoss(); 
+            door.aliveBoss(); 
+            door.aliveSuperMob();
+        }
     }
 
     // Once the knight pick up the yellow sword, knight can shoot the sword.

@@ -109,9 +109,14 @@ public class SuperMob : MonoBehaviour
         Destroy(gameObject);
         // only show finish line when SuperMod is defeated
         FinishLine finishLine = FindObjectOfType<FinishLine>(); 
-        if(finishLine != null)
+        Door door = FindObjectOfType<Door>(); 
+
+        if(finishLine != null && door != null)
         {
+            finishLine.DefeatSuperMob(); 
+            door.DefeatSuperMob(); 
             finishLine.ActivateFinishLine();
+            door.ActivateFinishLine();
         }
     }
 

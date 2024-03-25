@@ -38,7 +38,7 @@ public class ShootingSword : MonoBehaviour
                     if (rb != null)
                     {
                         rb.gravityScale = 1;
-                        superMob.GetComponent<SuperMob>().StartGeneratingMobs();
+                        // superMob.GetComponent<SuperMob>().StartGeneratingMobs();
                     }
                 }
             }
