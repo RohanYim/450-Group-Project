@@ -51,9 +51,11 @@ public class Player : MonoBehaviour {
     private float lastJumpTime; 
     public LayerMask groundLayer;
 
-    
+    public float teleportDistance = 5f;
+    public float teleportCooldown = 2f; 
+    private float lastTeleportTime = -2f;
 
-    
+
     private void Awake()
     {
         healthBar = GetComponentInChildren<HealthBar>();
@@ -98,6 +100,11 @@ public class Player : MonoBehaviour {
                 newProjectile.transform.Rotate(0, 0, 180);
             }
 
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            PerformTeleport();
         }
 
         //aimPivot.rotation = Quaternion.Euler(0, 0, angleToMouse);
@@ -270,6 +277,19 @@ public class Player : MonoBehaviour {
         isBuilding = true;
     }
 
+    void PerformTeleport()
+    {
+       
+        if (Time.time - lastTeleportTime >= teleportCooldown)
+        {
+      
+            Vector3 teleportDirection = mirror ? Vector3.left : Vector3.right;
 
+    
+            transform.position += teleportDirection * teleportDistance;
+
+            lastTeleportTime = Time.time;
+        }
+    }
 
 }
