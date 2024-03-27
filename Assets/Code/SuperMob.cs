@@ -9,6 +9,8 @@ public class SuperMob : MonoBehaviour
 {
     public float moveSpeed = 2f;
     public float moveDistance = 5f;
+    public float speed = 2f;
+
     private Vector3 startPosition;
     private Vector3 targetPosition;
     private bool movingRight = true;
@@ -122,24 +124,27 @@ public class SuperMob : MonoBehaviour
 
     void Update()
     {
-        // After the knight take the yellow sword, the super mob will fall down onto the platform and move right and left.
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-        if (Vector3.Distance(transform.position, targetPosition) < 1f && rb.gravityScale != 0)
-        {
-            if (movingRight)
-            {
-                targetPosition = startPosition - Vector3.right * moveDistance;
-            }
-            else
-            {
-                targetPosition = startPosition + Vector3.right * moveDistance;
-            }
-            movingRight = !movingRight; 
+        // 计算SuperMob当前位置与起始位置的距离
+        float distance = transform.position.x - startPosition.x;
 
-            if (!isAttacking)
-            {
-                // StartAttack();
-            }
+        // 如果到达了左侧或右侧的最大距离，改变方向
+        if (distance >= moveDistance)
+        {
+            movingRight = false;
+        }
+        else if (distance <= -moveDistance)
+        {
+            movingRight = true;
+        }
+
+        // 根据当前方向移动SuperMob
+        if (movingRight)
+        {
+            transform.position = new Vector3(transform.position.x + speed * Time.deltaTime, transform.position.y, transform.position.z);
+        }
+        else
+        {
+            transform.position = new Vector3(transform.position.x - speed * Time.deltaTime, transform.position.y, transform.position.z);
         }
     }
 

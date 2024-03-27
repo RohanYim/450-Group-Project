@@ -143,8 +143,9 @@ public class Player : MonoBehaviour {
             blade.GetComponent<Blade>().StartSwing();
         }
 
-        if (Input.GetMouseButtonDown(1) && isShooting)
+        if (Input.GetMouseButtonDown(1) && isShooting && shootLeft > 0)
         {
+            shootLeft -= 1;
             GameObject newProjectile = Instantiate(projectilePrefab);
             newProjectile.transform.position = transform.position;
             newProjectile.transform.rotation = _Blade.rotation;
@@ -259,6 +260,7 @@ public class Player : MonoBehaviour {
     // Once the knight pick up the yellow sword, knight can shoot the sword.
     public void SetShootingToTrue()
     {
+        shootLeft = 10;
         isShooting = true;
     }
 
