@@ -56,13 +56,25 @@ public class Blade : MonoBehaviour
     // give 1 damage when the blade touches the mob
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (canDealDamage && other.gameObject.CompareTag("Mob"))
+        if (canDealDamage)
         {
-            var mob = other.GetComponent<Mob>();
-            if (mob != null)
+            if (other.gameObject.CompareTag("Mob"))
             {
-                mob.TakeDamage(1);
-                canDealDamage = false;
+                var mob = other.GetComponent<Mob>();
+                if (mob != null)
+                {
+                    mob.TakeDamage(1);
+                    canDealDamage = false;
+                }
+            }
+            if (other.gameObject.CompareTag("SuperMob"))
+            {
+                var mob = other.GetComponent<SuperMob>();
+                if (mob != null)
+                {
+                    mob.TakeDamage(1);
+                    canDealDamage = false;
+                }
             }
         }
     }
