@@ -39,7 +39,7 @@ public class Player : MonoBehaviour {
     private bool isSwinging = false; 
     private bool isShooting = false;
     private bool isBuilding = false;
-    public int shootLeft = 10;
+    public int shootLeft = 50;
 
     public GameObject projectilePrefab;
     public Transform aimPivot;
@@ -267,7 +267,7 @@ public class Player : MonoBehaviour {
     // Once the knight pick up the yellow sword, knight can shoot the sword.
     public void SetShootingToTrue()
     {
-        shootLeft = 10;
+        shootLeft = 50;
         isShooting = true;
     }
 

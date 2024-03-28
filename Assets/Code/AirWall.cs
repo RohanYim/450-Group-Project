@@ -5,7 +5,7 @@ using UnityEngine;
 public class AirWall : MonoBehaviour
 {
 
-    public SuperMob superMobObject;
+    public GameObject bossObject;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +16,7 @@ public class AirWall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (superMobObject == null) {
+        if (bossObject == null) {
         
             Destroy(gameObject);
         }
