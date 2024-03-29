@@ -57,8 +57,5 @@ public class MovingObstacle : MonoBehaviour
         targetPos = wayPoints[pointIndex].transform.position;
 
 
-
-
-
     }
 }
