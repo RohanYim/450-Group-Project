@@ -76,6 +76,15 @@ public class Blade : MonoBehaviour
                     canDealDamage = false;
                 }
             }
+            if (other.gameObject.CompareTag("Skeleton"))
+            {
+                var mob = other.GetComponent<Skeleton>();
+                if (mob != null)
+                {
+                    mob.TakeDamage(1);
+                    canDealDamage = false;
+                }
+            }
         }
     }
 
@@ -91,6 +100,16 @@ public class Blade : MonoBehaviour
                 canDealDamage = false; 
             }
         }
+        if (canDealDamage && isSwinging && other.gameObject.CompareTag("Skeleton"))
+        {
+            var mob = other.GetComponent<Skeleton>(); 
+            if (mob != null)
+            {
+                mob.TakeDamage(1); 
+                canDealDamage = false; 
+            }
+        }
+           
     }
 
 }

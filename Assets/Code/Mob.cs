@@ -18,6 +18,7 @@ public class Mob : MonoBehaviour
     private bool movingRight = true;
     public bool fireballAttack = false;  // fireball attacking mob
     public bool puffAttack = false; // puff attacking mob
+    public bool isSuperMob = false;  // check if it's supermob
     [SerializeField] float health, maxHealth = 3f;
 
     [SerializeField] HealthBar healthBar;
@@ -124,6 +125,20 @@ public class Mob : MonoBehaviour
         }
 
         Destroy(gameObject); 
+        if(isSuperMob) {
+            // only show finish line when SuperMod is defeated
+            FinishLine finishLine = FindObjectOfType<FinishLine>(); 
+            Door door = FindObjectOfType<Door>(); 
+
+            if(finishLine != null && door != null)
+            {
+                finishLine.DefeatSuperMob(); 
+                door.DefeatSuperMob(); 
+                finishLine.ActivateFinishLine();
+                door.ActivateFinishLine();
+            }
+        }
+
     }
 
 

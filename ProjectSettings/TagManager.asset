@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Mob
   - SuperMob
+  - Skeleton
   layers:
   - Default
   - TransparentFX

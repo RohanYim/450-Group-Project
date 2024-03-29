@@ -77,7 +77,7 @@ public class Skeleton : MonoBehaviour
 
 
         timer += Time.deltaTime;
-        if (timer >= appearanceInterval && boss.transform.position.x - player.transform.position.x < 10)
+        if (timer >= appearanceInterval && boss!=null && boss.transform.position.x - player.transform.position.x < 10)
         {
             AppearBehindPlayer();
             timer = 0f;

@@ -12973,6 +12973,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1077360335602976627, guid: 51ffcb6695bed9c469181fd2baff6b7f, type: 3}
+      propertyPath: isSuperMob
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1077360335602976627, guid: 51ffcb6695bed9c469181fd2baff6b7f, type: 3}
       propertyPath: puffAttack
       value: 0
       objectReference: {fileID: 0}
