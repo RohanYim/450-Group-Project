@@ -10,6 +10,7 @@ public class MovingPlatforms : MonoBehaviour
     public Transform[] points;
 
     private int i;
+    private Vector3 originalLocalScale;
 
     void Start()
     {
@@ -35,6 +36,7 @@ public class MovingPlatforms : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             // Set the platform as the parent of the player
+           
             other.transform.SetParent(this.transform);
         }
     }
@@ -45,6 +47,7 @@ public class MovingPlatforms : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             // Remove the platform as the parent of the player
+           
             other.transform.SetParent(null);
         }
     }
@@ -53,6 +56,7 @@ public class MovingPlatforms : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player")) // Check if the collision is with the player
         {
+            originalLocalScale = collision.transform.localScale;
             collision.transform.SetParent(transform); // Set the platform as the parent of the player
         }
     }
@@ -62,6 +66,7 @@ public class MovingPlatforms : MonoBehaviour
         if (collision.gameObject.CompareTag("Player")) // Check if the player left the platform
         {
             collision.transform.SetParent(null); // Unset the parent
+            collision.transform.localScale = originalLocalScale;
         }
 
     }
