@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    private bool SuperMobDefeated = false;
-    private bool BossDefeated = false;
+    public bool SuperMobDefeated = false;
+    public bool BossDefeated = false;
 
     void Start()
     {

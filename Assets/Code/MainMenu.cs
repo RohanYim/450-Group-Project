@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
+        GameManager.Instance.ResetTotalTime();
         SceneManager.LoadSceneAsync(1);
     }
 

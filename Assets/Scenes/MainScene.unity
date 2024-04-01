@@ -2021,7 +2021,7 @@ Transform:
   m_GameObject: {fileID: 1120043917}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 356, y: -86.93, z: 0}
+  m_LocalPosition: {x: 360.1, y: -86.9, z: 0}
   m_LocalScale: {x: 2.2190323, y: 1.9977528, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2039,6 +2039,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7308558701a640c8adaea699461d87e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SuperMobDefeated: 0
+  BossDefeated: 0
 --- !u!1 &1123493223
 GameObject:
   m_ObjectHideFlags: 0
@@ -2680,16 +2682,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1453211871}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4144671, y: 1.4144671, z: 1.4144671}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1546707146}
+  m_Father: {fileID: 1772634999}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -332, y: 203.25}
+  m_AnchoredPosition: {x: -12.072388, y: -2.0723724}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1453211873
@@ -3156,7 +3158,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1772634999}
-  - {fileID: 1453211872}
   - {fileID: 836504143}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13084,6 +13085,7 @@ RectTransform:
   - {fileID: 1293183668}
   - {fileID: 385457787}
   - {fileID: 967477333}
+  - {fileID: 1453211872}
   m_Father: {fileID: 1546707146}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -13122,6 +13124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0833f777ebff64249992a868fe9b9038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SuperMobDefeated: 0
+  BossDefeated: 0
 --- !u!61 &1813453219
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13228,7 +13232,7 @@ Transform:
   m_GameObject: {fileID: 1813453217}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 356.05426, y: -89.020004, z: 0}
+  m_LocalPosition: {x: 360.15427, y: -88.990005, z: 0}
   m_LocalScale: {x: 2.042484, y: 2.6870816, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

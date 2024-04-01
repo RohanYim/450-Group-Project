@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 // only show finish line when SuperMob is defeated
 public class FinishLine : MonoBehaviour
 {
-    private bool SuperMobDefeated = false;
-    private bool BossDefeated = false;
+    public bool SuperMobDefeated = false;
+    public bool BossDefeated = false;
 
     void Start()
     {
@@ -36,8 +36,13 @@ public class FinishLine : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
+            GameManager.Instance.AddLevelCompletionTime(Time.timeSinceLevelLoad);
+            Debug.Log($"Total Time: {GameManager.Instance.TotalTime} seconds");
+            if (SceneManager.GetActiveScene().buildIndex == 2)
+            {
+                GameManager.Instance.SaveTimeIfInTopThree();
+            }
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-
         }
     }
 
