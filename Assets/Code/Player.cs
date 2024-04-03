@@ -55,6 +55,10 @@ public class Player : MonoBehaviour {
     public float teleportCooldown = 2f; 
     private float lastTeleportTime = -2f;
 
+    // Audio
+    public AudioSource attackSound;
+    public AudioSource hitSound;
+
 
     private void Awake()
     {
@@ -148,6 +152,7 @@ public class Player : MonoBehaviour {
         if (Input.GetMouseButtonDown(0) && !isSwinging) 
         {
             blade.GetComponent<Blade>().StartSwing();
+            attackSound.Play();
         }
 
         if (Input.GetMouseButtonDown(1) && isShooting && shootLeft > 0)
@@ -241,6 +246,7 @@ public class Player : MonoBehaviour {
     // player being attacked
     public void TakeDamage(float damage)
     {
+        hitSound.Play();
         health -= damage;
         healthBar.UpdateHealthBar(health, maxHealth);
         if (health <= 0)
