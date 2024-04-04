@@ -298,4 +298,9 @@ public class Player : MonoBehaviour {
         }
     }
 
+    public void AddKnockback(Vector2 force)
+    {
+        GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
+    }
+
 }

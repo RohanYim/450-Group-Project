@@ -19,6 +19,16 @@ public class Fireball : MonoBehaviour
         if (player != null)
         {
             player.TakeDamage(damage);
+
+            Vector2 knockbackDirection = collision.collider.transform.position - transform.position;
+            knockbackDirection = knockbackDirection.normalized; 
+
+
+            float knockbackForce = 20f; 
+            Vector2 force = knockbackDirection * knockbackForce;
+
+
+            player.AddKnockback(force);
         }
         Destroy(gameObject);
     }

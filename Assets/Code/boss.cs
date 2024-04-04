@@ -21,6 +21,8 @@ public class Boss : MonoBehaviour
 
     public Transform player;
 
+    Animator animator;
+
     private void Awake()
     {
         healthBar = GetComponentInChildren<HealthBar>();
@@ -42,6 +44,7 @@ public class Boss : MonoBehaviour
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
         }
+        animator = GetComponent<Animator>();
     }
 
     private void StartAttack()
@@ -89,8 +92,17 @@ public class Boss : MonoBehaviour
         healthBar.UpdateHealthBar(health, maxHealth);
         if (health <= 0)
         {
-            Die();
+            animator.SetBool("isDead", true);
+            StartCoroutine(DieWithDelay(0.5f));
+            //Die();
         }
+    }
+
+    IEnumerator DieWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        Die();
     }
 
     void Die()
