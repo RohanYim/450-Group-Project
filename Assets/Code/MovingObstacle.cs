@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//reference: https://www.youtube.com/watch?v=IGDrF1Cq9Q0&list=UULPmKuuup8YsQweMthPU2iNUA&index=26
 
 public class MovingObstacle : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class MovingObstacle : MonoBehaviour
     int pointIndex;
     int pointCount;
     int direction = 1;
+
+    public float waitDuration;
+    int speedMultiplier = 1;
 
 
     private void Awake()
@@ -33,7 +37,7 @@ public class MovingObstacle : MonoBehaviour
 
     private void Update()
     {
-        var step = speed * Time.deltaTime;
+        var step = speedMultiplier*speed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
         if (transform.position == targetPos)
         {
@@ -55,7 +59,16 @@ public class MovingObstacle : MonoBehaviour
 
         pointIndex += direction;
         targetPos = wayPoints[pointIndex].transform.position;
+        StartCoroutine(WaitNextPoint());
+
+    }
 
 
+
+    IEnumerator WaitNextPoint()
+    {
+        speedMultiplier = 0;
+        yield return new WaitForSeconds(waitDuration);
+        speedMultiplier = 1;
     }
 }

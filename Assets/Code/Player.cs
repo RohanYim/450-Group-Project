@@ -195,17 +195,7 @@ public class Player : MonoBehaviour {
     {
          if (_inputAxis.x != 0)
         {
-            if (SceneName == "MainScene")
-            {
-                rig.velocity = new Vector2(_inputAxis.x * WalkSpeed * Time.deltaTime, rig.velocity.y);
-
-                if (_canWalk)
-                {
-                    _Legs.clip = _walk;
-                    _Legs.Play();
-                }
-            }
-            else if (SceneName == "Level_2")
+            if (SceneName =="Level_1" || SceneName == "Level_22" || SceneName == "MainScene" || SceneName == "Level_2")
             {
                 rig.velocity = new Vector2(_inputAxis.x * WalkSpeed * Time.deltaTime, rig.velocity.y);
 
