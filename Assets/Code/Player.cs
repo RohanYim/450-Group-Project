@@ -93,7 +93,7 @@ public class Player : MonoBehaviour {
             CreateBushAtMousePosition();
         }
 
-        if (Input.GetMouseButtonDown(1) && SceneName == "Level_2")
+        if (Input.GetMouseButtonDown(1) && SceneName == "Level_4")
         {
 
             GameObject newProjectile = Instantiate(projectilePrefab);
@@ -195,7 +195,7 @@ public class Player : MonoBehaviour {
     {
          if (_inputAxis.x != 0)
         {
-            if (SceneName =="Level_1" || SceneName == "Level_22" || SceneName == "MainScene" || SceneName == "Level_2")
+            if (SceneName =="Level_1" || SceneName == "Level_2" || SceneName == "Level_3" || SceneName == "Level_4")
             {
                 rig.velocity = new Vector2(_inputAxis.x * WalkSpeed * Time.deltaTime, rig.velocity.y);
 

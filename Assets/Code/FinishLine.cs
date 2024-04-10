@@ -49,6 +49,7 @@ public class FinishLine : MonoBehaviour
     public void ActivateFinishLine()
     {
         if (SuperMobDefeated && BossDefeated) {
+            Debug.Log(111111);
             GetComponent<Collider2D>().enabled = true;
             GetComponent<SpriteRenderer>().enabled = true;
 

@@ -13,7 +13,7 @@ public class Obstacle : MonoBehaviour
             Player player = collision.gameObject.GetComponent<Player>();
             if (player != null)
             {
-                float newHealth = player.health/2;
+                float newHealth = player.health - 2f;
                 player.TakeDamage(player.health - newHealth);
             }
         }
