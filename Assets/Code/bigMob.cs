@@ -100,14 +100,13 @@ public class bigMob : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
-        // only show finish line when SuperMod is defeated
-        FinishLine finishLine = FindObjectOfType<FinishLine>();
-        Door door = FindObjectOfType<Door>();
+        FinishLine finishLine = FindObjectOfType<FinishLine>(); 
+        Door door = FindObjectOfType<Door>(); 
 
-        if (finishLine != null && door != null)
+        if(finishLine != null && door != null)
         {
-            finishLine.DefeatBoss();
-            door.DefeatBoss();
+            finishLine.DefeatSuperMob(); 
+            door.DefeatSuperMob(); 
             finishLine.ActivateFinishLine();
             door.ActivateFinishLine();
         }

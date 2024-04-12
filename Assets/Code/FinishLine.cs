@@ -36,8 +36,9 @@ public class FinishLine : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            GameManager.Instance.AddLevelCompletionTime(Time.timeSinceLevelLoad);
-            Debug.Log($"Total Time: {GameManager.Instance.TotalTime} seconds");
+            if (GameManager.Instance != null) {
+                GameManager.Instance.AddLevelCompletionTime(Time.timeSinceLevelLoad);
+            } 
             if (SceneManager.GetActiveScene().buildIndex == 2)
             {
                 GameManager.Instance.SaveTimeIfInTopThree();
@@ -49,7 +50,6 @@ public class FinishLine : MonoBehaviour
     public void ActivateFinishLine()
     {
         if (SuperMobDefeated && BossDefeated) {
-            Debug.Log(111111);
             GetComponent<Collider2D>().enabled = true;
             GetComponent<SpriteRenderer>().enabled = true;
 

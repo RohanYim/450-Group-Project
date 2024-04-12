@@ -144,5 +144,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   superMobTag: SuperMob
-  shootingSkill: 0
+  shootingSkill: 1
   buildingSkill: 1

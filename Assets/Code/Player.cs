@@ -3,9 +3,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour {
+
+    public static Player instance;
     public float WalkSpeed;
     public float JumpForce;
     public AnimationClip _walk, _jump;
@@ -60,10 +63,24 @@ public class Player : MonoBehaviour {
     public AudioSource attackSound;
     public AudioSource hitSound;
 
+    public bool isPaused;
+
+    public TMP_Text shootleft;
+    public TMP_Text buildleft;
+
 
     private void Awake()
     {
         healthBar = GetComponentInChildren<HealthBar>();
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);  
+        }
+
     }
 
 	void Start ()
@@ -73,10 +90,15 @@ public class Player : MonoBehaviour {
         health = maxHealth;
         healthBar.UpdateHealthBar(health, maxHealth);
         SceneName = SceneManager.GetActiveScene().name;
+        updateShoots(shootLeft);
+        updateBuilds(buildingLeft);
 	}
 
     void Update()
     {
+        if(isPaused) {
+            return;
+        }
         _inputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         CheckJumpAbility();
@@ -122,6 +144,7 @@ public class Player : MonoBehaviour {
 
         Instantiate(bushPrefab, mousePositionInWorld, Quaternion.identity);
         buildingLeft--;
+        updateBuilds(buildingLeft);
     }
 
     void FixedUpdate()
@@ -160,6 +183,7 @@ public class Player : MonoBehaviour {
         if (Input.GetMouseButtonDown(1) && isShooting && shootLeft > 0)
         {
             shootLeft -= 1;
+            updateShoots(shootLeft);
             GameObject newProjectile = Instantiate(projectilePrefab);
             newProjectile.transform.position = transform.position;
             newProjectile.transform.rotation = _Blade.rotation;
@@ -265,14 +289,31 @@ public class Player : MonoBehaviour {
     // Once the knight pick up the yellow sword, knight can shoot the sword.
     public void SetShootingToTrue()
     {
+        print(shootLeft);
         shootLeft = 50;
+        updateShoots(shootLeft);
         isShooting = true;
     }
 
     // Once the knight pick up the yellow sword on level2, knight can build the bushes.
     public void SetBuildingToTrue()
     {
+        buildingLeft = 50;
         isBuilding = true;
+        updateBuilds(buildingLeft);
+    }
+
+    public void updateShoots(int num) {
+        if(shootleft != null){
+            shootleft.text = "Shoot lefts: " + num;
+        }
+    }
+
+    public void updateBuilds(int num) {
+        if(buildleft != null) {
+            buildleft.text = "Build lefts: " + num;
+        }
+        
     }
 
     void PerformTeleport()
