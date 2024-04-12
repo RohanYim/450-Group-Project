@@ -145,13 +145,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flying eye (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 698074537946245325, guid: 0359c1a951951024c80de09cbe4a5efc, type: 3}
+      propertyPath: m_TagString
+      value: Boss
+      objectReference: {fileID: 0}
     - target: {fileID: 2791570707534199339, guid: 0359c1a951951024c80de09cbe4a5efc, type: 3}
       propertyPath: m_LocalScale.x
-      value: -5.9204683
+      value: -10.263724
       objectReference: {fileID: 0}
     - target: {fileID: 2791570707534199339, guid: 0359c1a951951024c80de09cbe4a5efc, type: 3}
       propertyPath: m_LocalScale.y
-      value: 5.027697
+      value: 8.716016
+      objectReference: {fileID: 0}
+    - target: {fileID: 2791570707534199339, guid: 0359c1a951951024c80de09cbe4a5efc, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.7336
       objectReference: {fileID: 0}
     - target: {fileID: 2791570707534199339, guid: 0359c1a951951024c80de09cbe4a5efc, type: 3}
       propertyPath: m_LocalPosition.x

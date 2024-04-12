@@ -109,7 +109,15 @@ public class Blade : MonoBehaviour
                 canDealDamage = false; 
             }
         }
-           
+        if (canDealDamage && isSwinging && other.gameObject.CompareTag("Boss"))
+        {
+            var mob = other.GetComponent<Boss>();
+            if (mob != null)
+            {
+                mob.TakeDamage(1);
+                canDealDamage = false;
+            }
+        }
     }
 
 }

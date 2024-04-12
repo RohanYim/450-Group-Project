@@ -40,6 +40,7 @@ public class Player : MonoBehaviour {
     private bool isShooting = false;
     private bool isBuilding = false;
     public int shootLeft = 50;
+    public int buildingLeft = 50;
 
     public GameObject projectilePrefab;
     public Transform aimPivot;
@@ -89,11 +90,11 @@ public class Player : MonoBehaviour {
         float angleToMouse = radiansToMouse * Mathf.Rad2Deg;
 
         // T for create a bush
-        if (Input.GetKeyDown(KeyCode.T) && isBuilding) {
+        if (Input.GetKeyDown(KeyCode.T) && isBuilding && buildingLeft > 0) {
             CreateBushAtMousePosition();
         }
 
-        if (Input.GetMouseButtonDown(1) && SceneName == "Level_4")
+        /*if (Input.GetMouseButtonDown(1) && SceneName == "Level_4")
         {
 
             GameObject newProjectile = Instantiate(projectilePrefab);
@@ -104,7 +105,7 @@ public class Player : MonoBehaviour {
                 newProjectile.transform.Rotate(0, 0, 180);
             }
 
-        }
+        }*/
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -120,6 +121,7 @@ public class Player : MonoBehaviour {
         mousePositionInWorld.z = 0; 
 
         Instantiate(bushPrefab, mousePositionInWorld, Quaternion.identity);
+        buildingLeft--;
     }
 
     void FixedUpdate()

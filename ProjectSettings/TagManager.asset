@@ -7,6 +7,8 @@ TagManager:
   - Mob
   - SuperMob
   - Skeleton
+  - BigMob
+  - Boss
   layers:
   - Default
   - TransparentFX
