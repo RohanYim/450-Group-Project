@@ -85,7 +85,7 @@ public class Blade : MonoBehaviour
                     canDealDamage = false;
                 }
             }
-            if (other.gameObject.CompareTag("bigMob"))
+            if (other.gameObject.CompareTag("BigMob"))
             {
                 var mob = other.GetComponent<bigMob>();
                 if (mob != null)
@@ -127,7 +127,7 @@ public class Blade : MonoBehaviour
                 canDealDamage = false;
             }
         }
-        if (canDealDamage && isSwinging && other.gameObject.CompareTag("bigMob"))
+        if (canDealDamage && isSwinging && other.gameObject.CompareTag("BigMob"))
         {
             var mob = other.GetComponent<bigMob>();
             if (mob != null)
