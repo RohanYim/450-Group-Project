@@ -3,34 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class MusicManager : MonoBehaviour
 {
-
-    public AudioSource audioSource; 
+    public static MusicManager Instance = null;
+    public AudioSource audioSource;
     public float volumeChangeAmount = 0.1f;
 
-    public void PlayGame()
+    private void Awake()
     {
-        GameManager.Instance.ResetTotalTime();
-        SceneManager.LoadSceneAsync(1);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+            
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject); 
+        }
     }
 
-
-
-
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
-
-
-
+    
     public void IncreaseVolume()
     {
         if (audioSource.volume < 1)
         {
             audioSource.volume += volumeChangeAmount;
-            
         }
     }
 
@@ -41,10 +39,10 @@ public class MainMenu : MonoBehaviour
             audioSource.volume -= volumeChangeAmount;
             if (audioSource.volume < 0)
             {
-                print(1);
+                audioSource.volume = 0;
             }
- 
         }
     }
+
 
 }
