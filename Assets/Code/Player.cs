@@ -45,6 +45,12 @@ public class Player : MonoBehaviour {
     public int shootLeft = 50;
     public int buildingLeft = 50;
 
+    public bool isInvincible = false;   
+    public bool canFly = false;         
+
+    public float lastDamageTime = 0;      
+    public float damageCooldown = 1.0f;  
+
     public GameObject projectilePrefab;
     public Transform aimPivot;
 
@@ -99,6 +105,16 @@ public class Player : MonoBehaviour {
         if(isPaused) {
             return;
         }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            ToggleInvincibility();
+        }
+
+        if (canFly)
+        {
+            HandleFlight();
+        }
+
         _inputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         CheckJumpAbility();
@@ -137,6 +153,14 @@ public class Player : MonoBehaviour {
         //aimPivot.rotation = Quaternion.Euler(0, 0, angleToMouse);
     }
 
+    void HandleFlight()
+    {
+        float verticalInput = Input.GetAxis("Vertical") * 10; 
+        float horizontalInput = Input.GetAxis("Horizontal") * 10;
+        rig.velocity = new Vector2(rig.velocity.x, verticalInput);
+        rig.velocity = new Vector2(horizontalInput, verticalInput);
+    }
+
     void CreateBushAtMousePosition() {
         Vector3 mousePosition = Input.mousePosition;
         Vector3 mousePositionInWorld = Camera.main.ScreenToWorldPoint(mousePosition);
@@ -151,6 +175,20 @@ public class Player : MonoBehaviour {
     {
         HandleMirrorAndRotation();
         HandleMovementAndJump();
+    }
+
+    void ToggleInvincibility()
+    {
+        isInvincible = !isInvincible; 
+        canFly = isInvincible;        
+
+        rig.gravityScale = isInvincible ? 0 : 2; 
+
+        if (!isInvincible)
+        {
+            rig.velocity = new Vector2(rig.velocity.x, 0); 
+            rig.velocity = new Vector2(_inputAxis.x * WalkSpeed * Time.deltaTime, rig.velocity.y);
+        }
     }
 
     void CheckJumpAbility()
@@ -262,14 +300,21 @@ public class Player : MonoBehaviour {
     // player being attacked
     public void TakeDamage(float damage)
     {
-        hitSound.Play();
+        if (Time.time - lastDamageTime < damageCooldown) return;  
+        hitSound.Play();  
+
+        if (isInvincible) return;  
+
         health -= damage;
-        healthBar.UpdateHealthBar(health, maxHealth);
+        healthBar.UpdateHealthBar(health, maxHealth);  
+        lastDamageTime = Time.time;  
+
         if (health <= 0)
         {
-            Die();
+            Die();  
         }
     }
+
 
     public void Die()
     {
