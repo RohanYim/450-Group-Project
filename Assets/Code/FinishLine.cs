@@ -39,7 +39,7 @@ public class FinishLine : MonoBehaviour
             if (GameManager.Instance != null) {
                 GameManager.Instance.AddLevelCompletionTime(Time.timeSinceLevelLoad);
             } 
-            if (SceneManager.GetActiveScene().buildIndex == 2)
+            if (SceneManager.GetActiveScene().buildIndex == 4)
             {
                 GameManager.Instance.SaveTimeIfInTopThree();
             }

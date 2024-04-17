@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-
+            // PlayerPrefs.DeleteAll();
 
         }
         else
@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public void AddLevelCompletionTime(float time)
     {
         TotalTime += time;
+        print(TotalTime);
     }
 
     public void ResetTotalTime()
